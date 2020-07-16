@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My fruit list</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="vueAlert('hey hey!!')">click here frm vue</button> 
+      <div class="headers" v-on:click="vueAlert('hey hey!!')">
+      {{message}}
+      </div> 
+      <input v-model="message" type="text" placeholder="fruit" class="inputClass"/>
+      <button v-on:click="addNewFruit">add your fruit </button>
+
+       <ul>
+        <li v-for="fruit in fruits">
+          {{ fruit }}
+        </li>
+      </ul>
+    </div>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          message: "",
+          htmlMessage: "<i>logo style</i>",
+          newMessage: "Here we are encountering something new",
+          loop: false,
+          count: 2,
+          classInit: "headers",
+          fruits: [
+            "banana",
+            "Apple",
+            "Watermelon",
+            "Orange"
+          ],
+        },
+        methods: {
+          vueAlert: function (mesg) {
+            alert(mesg)
+          },
+          addNewFruit: function () {
+            this.fruits.push(this.message)
+            this.message = ""
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
