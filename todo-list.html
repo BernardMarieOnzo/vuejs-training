@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My first Vue app</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <section id="app">
+
+      <div>TODOS</div>
+      <div class="todo-part">
+        <input v-model="todoText" type="text" placeholder="What needs to be done?" >
+
+        <div>
+          <todo-list :todo="todo"  v-for="todo in todos" ></todo-list>
+        </div>
+
+      </div>
+
+
+    </section>
+
+    <script>
+
+
+      Vue.component("todo-list", {
+        props: ['todo'],
+        template: "<div>{{todo.text | capitalize }}</div>",
+        filters: {
+          capitalize: function(val) {
+            return val.toUpperCase()
+          }
+        },
+      });
+
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          todoText: "",
+          todos: [
+            {
+              id: 1,
+              text: "todo 1",
+              done: false
+            },
+            {
+              id: 1,
+              text: "todo 1",
+              done: false
+            },
+            {
+              id: 1,
+              text: "todo 1",
+              done: false
+            }
+        ]
+        },
+        methods: {
+          vueAlert: function (mesg) {
+            alert(mesg);
+          },
+          addNewFruit: function () {
+            this.fruits.push(this.message);
+            this.message = "";
+          },
+        },
+        computed: {
+          getSize: function () {
+            return this.todos.length;
+          },
+        },
+        
+        beforeCreate() {
+          console.log("from beforeCreate");
+        },
+        created() {
+          console.log("from created");
+          console.log(this.message);
+        },
+      });
+    </script>
+  </body>
+</html>
